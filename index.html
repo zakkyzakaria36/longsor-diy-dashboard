@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="id" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jejak di Lereng - Dokumentasi Pembuatan Poster</title>
+    <meta name="description" content="Dokumentasi lengkap proses pembuatan poster infografis 'Jejak di Lereng': analisis 112 kejadian longsor DIY (2016-2026), metodologi, visualisasi data, dan dampak mitigasi." />
+    <meta property="og:title" content="Jejak di Lereng - Dokumentasi Pembuatan Poster" />
+    <meta property="og:description" content="Analisis spasio-temporal longsor DIY dengan 6 visualisasi data dan temuan mitigasi." />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: linear-gradient(135deg, #0a0e1a 0%, #1a1f3a 100%);
+        color: #e0e6ff;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      header {
+        background: linear-gradient(90deg, rgba(255,107,107,0.1) 0%, rgba(168,85,247,0.1) 100%);
+        border-bottom: 2px solid rgba(255,107,107,0.3);
+        padding: 3rem 2rem;
+        margin-bottom: 3rem;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 900;
+        background: linear-gradient(90deg, #FF6B6B, #A855F7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.5rem;
+      }
+
+      .subtitle {
+        color: #b0b8d4;
+        font-size: 1rem;
+      }
+
+      section {
+        background: linear-gradient(135deg, rgba(30,35,60,0.5) 0%, rgba(50,55,90,0.3) 100%);
+        border: 1px solid rgba(255,107,107,0.15);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        backdrop-filter: blur(10px);
+      }
+
+      h2 {
+        color: #FF6B6B;
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #FF6B6B;
+        padding-bottom: 0.5rem;
+      }
+
+      h3 {
+        color: #A855F7;
+        font-size: 1.25rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      p, li {
+        color: #b0b8d4;
+        margin-bottom: 0.75rem;
+      }
+
+      ul, ol {
+        margin-left: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      .metric-card {
+        background: linear-gradient(135deg, rgba(255,107,107,0.1) 0%, rgba(168,85,247,0.05) 100%);
+        border: 1px solid rgba(255,107,107,0.2);
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        transition: all 0.3s ease;
+      }
+
+      .metric-card:hover {
+        border-color: rgba(255,107,107,0.5);
+        box-shadow: 0 8px 32px rgba(255,107,107,0.1);
+        transform: translateY(-2px);
+      }
+
+      .metric-value {
+        font-size: 2rem;
+        font-weight: 900;
+        color: #FF6B6B;
+        margin: 0.5rem 0;
+      }
+
+      .metric-label {
+        color: #b0b8d4;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin: 1rem 0;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin: 1rem 0;
+      }
+
+      @media (max-width: 768px) {
+        .grid-2, .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          font-size: 1.75rem;
+        }
+        h2 {
+          font-size: 1.25rem;
+        }
+      }
+
+      code {
+        background: rgba(255,107,107,0.1);
+        color: #FF6B6B;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.9rem;
+      }
+
+      .highlight {
+        color: #2ecc71;
+        font-weight: 600;
+      }
+
+      footer {
+        text-align: center;
+        color: #8892b0;
+        padding: 2rem;
+        border-top: 1px solid rgba(255,107,107,0.1);
+        margin-top: 3rem;
+        font-size: 0.9rem;
+      }
+
+      .chart-showcase {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .chart-item {
+        background: rgba(20, 25, 45, 0.8);
+        border: 1px solid rgba(255,107,107,0.2);
+        border-radius: 8px;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      .chart-number {
+        font-size: 2rem;
+        color: #FF6B6B;
+        font-weight: 900;
+      }
+
+      @media (max-width: 768px) {
+        .chart-showcase {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+      <header>
+        <h1>🏔️ Jejak di Lereng</h1>
+        <p class="subtitle">Dokumentasi Pembuatan Poster Infografis Longsor DIY</p>
+      </header>
+
+      <!-- 1. KONSEP & PERENCANAAN -->
+      <section>
+        <h2>1. Konsep & Perencanaan</h2>
+        <p>Proyek ini lahir dari pertanyaan sederhana: <strong>"Bagaimana pola longsor di DIY?"</strong></p>
+        
+        <h3>Scope Penelitian</h3>
+        <div class="metric-card">
+          <div class="metric-label">Dataset</div>
+          <div class="metric-value">112</div>
+          <p style="margin: 0; color: #A855F7;">Kejadian longsor (Feb 2016 - Feb 2026)</p>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-label">Wilayah</div>
+          <div class="metric-value">5</div>
+          <p style="margin: 0; color: #A855F7;">Kulon Progo, Sleman, Gunungkidul, Bantul, Kota Yogyakarta</p>
+        </div>
+
+        <h3>Sumber Data</h3>
+        <ul>
+          <li>DIBI BNPB (Database Bencana Alam) - primary source</li>
+          <li>BPBD DIY (Badan Penanggulangan Bencana Daerah) - laporan tahunan</li>
+          <li>BMKG Yogyakarta - data curah hujan</li>
+          <li>Peta Rawan Bencana DIY - boundary geografis</li>
+        </ul>
+      </section>
+
+      <!-- 2. DATA & EKSPLORASI -->
+      <section>
+        <h2>2. Data Processing & Analisis</h2>
+        
+        <h3>Pipeline Data</h3>
+        <p><code>Raw Data</code> → <code>Cleaning</code> → <code>Aggregation</code> → <code>6 CSV Files</code> → <code>Visualization</code></p>
+
+        <h3>Key Findings</h3>
+        <div class="grid-2">
+          <div class="metric-card">
+            <div class="metric-label">Hotspot Wilayah</div>
+            <div class="metric-value">41</div>
+            <p style="margin: 0;">Kulon Progo (36.6% dari total)</p>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Musim Hujan</div>
+            <div class="metric-value">96</div>
+            <p style="margin: 0;">86% terjadi saat hujan (Okt-Mar)</p>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Puncak Tertinggi</div>
+            <div class="metric-value">24</div>
+            <p style="margin: 0;">Tahun 2021</p>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Fatality (2020-2026)</div>
+            <div class="metric-value" style="color: #2ecc71;">0</div>
+            <p style="margin: 0;">Hasil program mitigasi</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. VISUALISASI -->
+      <section>
+        <h2>3. Desain Visualisasi (6 Charts)</h2>
+        
+        <p>Setiap chart dirancang untuk menjawab 1 pertanyaan spesifik:</p>
+
+        <div class="chart-showcase">
+          <div class="chart-item">
+            <div class="chart-number">1</div>
+            <h3 style="margin-top: 0.5rem;">Peta Choropleth</h3>
+            <p style="font-size: 0.9rem;">Di mana hotspot?</p>
+            <p style="font-size: 0.85rem; color: #8892b0;">GeoPandas + YlOrRd</p>
+          </div>
+          <div class="chart-item">
+            <div class="chart-number">2</div>
+            <h3 style="margin-top: 0.5rem;">Heatmap 5×12</h3>
+            <p style="font-size: 0.9rem;">Pola spasio-temporal?</p>
+            <p style="font-size: 0.85rem; color: #8892b0;">Seaborn wilayah × bulan</p>
+          </div>
+          <div class="chart-item">
+            <div class="chart-number">3</div>
+            <h3 style="margin-top: 0.5rem;">Line Chart</h3>
+            <p style="font-size: 0.9rem;">Kapan pola puncak?</p>
+            <p style="font-size: 0.85rem; color: #8892b0;">Temporal, Februari highlight</p>
+          </div>
+          <div class="chart-item">
+            <div class="chart-number">4</div>
+            <h3 style="margin-top: 0.5rem;">Bar Tahunan</h3>
+            <p style="font-size: 0.9rem;">Trend jangka panjang?</p>
+            <p style="font-size: 0.85rem; color: #8892b0;">2021 highlight (mitigasi)</p>
+          </div>
+          <div class="chart-item">
+            <div class="chart-number">5</div>
+            <h3 style="margin-top: 0.5rem;">Donut Dampak</h3>
+            <p style="font-size: 0.9rem;">Breakdown dampak?</p>
+            <p style="font-size: 0.85rem; color: #8892b0;">11.1K mengungsi, 268 rusak</p>
+          </div>
+          <div class="chart-item">
+            <div class="chart-number">6</div>
+            <h3 style="margin-top: 0.5rem;">Statistik Kunci</h3>
+            <p style="font-size: 0.9rem;">Quick summary?</p>
+            <p style="font-size: 0.85rem; color: #8892b0;">5 metrics utama</p>
+          </div>
+        </div>
+
+        <h3>Palet Warna & Styling</h3>
+        <ul>
+          <li><strong>Primary:</strong> <code>#FF6B6B</code> (merah - bahaya/hotspot)</li>
+          <li><strong>Secondary:</strong> <code>#A855F7</code> (ungu - data sekunder)</li>
+          <li><strong>Success:</strong> <code>#2ecc71</code> (hijau - mitigasi positif)</li>
+          <li><strong>Background:</strong> <code>#0A0E1A</code> (dark theme)</li>
+          <li><strong>DPI:</strong> 300 (print quality)</li>
+          <li><strong>Background:</strong> Transparent PNG</li>
+        </ul>
+      </section>
+
+      <!-- 4. JUDUL DERIVATION -->
+      <section>
+        <h2>4. Proses Derivasi Judul</h2>
+        <p><strong>"Jejak di Lereng"</strong> bukan judul preset — muncul dari temuan analisis.</p>
+        
+        <h3>Logika Penamaan</h3>
+        <ol>
+          <li><strong>Jejak</strong> = pola historis, tanda-tanda yang tertinggal</li>
+          <li><strong>di Lereng</strong> = lokasi (slope/bukit), DIY secara geografis</li>
+          <li>Metafora: data adalah "jejak" perilaku alam</li>
+          <li>Singkat, mudah diingat, dalam Bahasa Indonesia</li>
+        </ol>
+      </section>
+
+      <!-- 5. TEKNOLOGI & OUTPUT -->
+      <section>
+        <h2>5. Teknologi & Deliverables</h2>
+        
+        <h3>Tech Stack</h3>
+        <ul>
+          <li><code>Python 3.10</code> - data processing</li>
+          <li><code>Pandas</code> - data aggregation</li>
+          <li><code>Matplotlib & Seaborn</code> - visualization</li>
+          <li><code>GeoPandas</code> - spatial mapping</li>
+        </ul>
+
+        <h3>Output Files</h3>
+        <div class="grid-2">
+          <div>
+            <h4 style="color: #A855F7;">CSV Data (6)</h4>
+            <ul style="margin-bottom: 0;">
+              <li>peta_choropleth.csv</li>
+              <li>heatmap_wilayah_bulan.csv</li>
+              <li>line_bulanan.csv</li>
+              <li>bar_tahunan.csv</li>
+              <li>donut_dampak.csv</li>
+              <li>key_statistics.csv</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="color: #A855F7;">PNG Charts (6)</h4>
+            <ul style="margin-bottom: 0;">
+              <li>peta_choropleth.png</li>
+              <li>heatmap_wilayah_bulan.png</li>
+              <li>line_bulanan.png</li>
+              <li>bar_tahunan_dampak.png</li>
+              <li>donut_chart_dampak.png</li>
+              <li>key_statistics_card.png</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. PROGRAM MITIGASI -->
+      <section>
+        <h2>6. Dampak Program Mitigasi</h2>
+        
+        <p>Temuan paling signifikan: <span class="highlight">sejak 2020, fatality rate turun ke 0%</span></p>
+
+        <div class="grid-3">
+          <div class="metric-card">
+            <div class="metric-label">SMS Early Warning</div>
+            <div class="metric-value">15K</div>
+            <p style="margin: 0;">Penduduk tercakup</p>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Relokasi Keluarga</div>
+            <div class="metric-value">2.5K</div>
+            <p style="margin: 0;">Dari area rawan</p>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Retention Walls</div>
+            <div class="metric-value">45</div>
+            <p style="margin: 0;">92% efektif</p>
+          </div>
+        </div>
+
+        <h3>Perbandingan Pre-Post 2020</h3>
+        <ul>
+          <li><strong>2016-2019:</strong> 44 kejadian, 20 kematian (45.5% fatality)</li>
+          <li><strong>2020-2026:</strong> 68 kejadian, <span class="highlight">0 kematian (0% fatality)</span></li>
+        </ul>
+      </section>
+
+      <!-- 7. CARA PENGGUNAAN POSTER -->
+      <section>
+        <h2>7. Penggunaan & Deployment</h2>
+        
+        <h3>Poster Print</h3>
+        <ul>
+          <li>Format: A3 (297×420mm)</li>
+          <li>Resolusi: 300 DPI</li>
+          <li>Tata letak: 6 charts + captions + QR code</li>
+          <li>Papan: Sekolah, kantor BPBD, ruang publik</li>
+        </ul>
+
+        <h3>Web Dashboard (Optional)</h3>
+        <ul>
+          <li>Platform: Streamlit Cloud / Vercel</li>
+          <li>Fitur: Interactive charts, data download, QR code</li>
+          <li>URL: Embedded di poster sebagai QR code</li>
+        </ul>
+      </section>
+
+      <!-- 8. KESIMPULAN -->
+      <section>
+        <h2>8. Kesimpulan</h2>
+        
+        <p><strong>"Jejak di Lereng"</strong> adalah analisis spasio-temporal komprehensif yang menunjukkan:</p>
+        <ol>
+          <li>Pola geografis jelas: Kulon Progo adalah hotspot utama</li>
+          <li>Pola musiman signifikan: 86% terjadi saat musim hujan</li>
+          <li><span class="highlight">Program mitigasi berhasil: fatality rate 0% sejak 2020</span></li>
+        </ol>
+
+        <p style="margin-top: 1.5rem;">Poster ini dirancang untuk <strong>edukasi publik dan advokasi kebijakan</strong> — data visual yang mudah dipahami namun tetap akademis.</p>
+      </section>
+
+      <!-- FOOTER -->
+      <footer>
+        <p>📊 Jejak di Lereng | Analisis Longsor DIY 2016-2026</p>
+        <p>Data: DIBI BNPB, BPBD DIY, BMKG Yogyakarta | Dokumentasi: 2026</p>
+      </footer>
+    </div>
+  </body>
+</html>
